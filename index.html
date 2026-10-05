@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beeraley Direct | Suuqa Beeraleyda Soomaaliyeed</title>
+  <meta name="description" content="Ku xidhi beeraleyda Soomaaliyeed si toos ah. Ka iibso khadraad, midho, badar iyo saliid cusub." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-theme="light">
+
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
+        <img class="logo-mark" src="assets/logo-veg.png" alt="" width="40" height="40" />
+        <span class="logo-text">Beeraley<span>Direct</span></span>
+      </a>
+
+      <div class="header-actions">
+        <button type="button" class="currency-btn" id="currencyToggleBtn" onclick="toggleCurrency()" title="USD / SOS">USD</button>
+        <button type="button" class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Theme" aria-label="Theme">◐</button>
+        <button type="button" class="icon-btn" id="langToggleBtn" onclick="toggleLanguage()" title="Language">SO</button>
+        <button type="button" class="icon-btn" onclick="openChatDrawer(101)" title="Chat" aria-label="Chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4z"/></svg>
+          <span class="badge" id="chatBadge">2</span>
+        </button>
+        <button type="button" class="icon-btn" onclick="openCartDrawer()" title="Cart" aria-label="Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.4 11.2a2 2 0 002 1.6h7.8a2 2 0 001.9-1.5L21 8H7"/></svg>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+        <button type="button" class="btn-primary btn-sm" id="headerRegisterBtn" onclick="openFarmerRegisterModal()">
+          <span data-i18n="joinAsFarmer">Is-diiwaangeli</span>
+        </button>
+        <button type="button" class="btn-secondary btn-sm" id="headerSellBtn" onclick="openFarmerPostModal()" style="display:none;">
+          <span data-i18n="postProduce">Ku Iibi Alaab</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="assets/bananas.png" alt="" />
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="container hero-content">
+      <p class="hero-brand">Beeraley Direct</p>
+      <h1 class="hero-title" data-i18n="heroTitle">Si toos ah ugu xidhi beeraleyda iyo suuqyada Soomaaliyeed</h1>
+      <p class="hero-desc" data-i18n="heroDesc">Midho, khadraad, badar iyo saliid cusub — toos uga iibso beerta, dhexdhexaadiye la'aan.</p>
+      <div class="hero-buttons">
+        <a href="#marketplace" class="btn-primary" data-i18n="shopNow">Ka gal suuqa</a>
+        <button type="button" class="btn-ghost" onclick="openFarmerRegisterModal()" data-i18n="joinAsFarmer">Is-diiwaangeli beeraley ahaan</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-intro">
+        <h2 data-i18n="howItWorksTitle">Sida loo dalbado</h2>
+        <p data-i18n="howItWorksSub">Saddex tallaabo oo fudud oo aad toos ugu iibsan kartid beeraleyda.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-item">
+          <span class="step-num">01</span>
+          <h3 data-i18n="step1Title">Dooro alaabta</h3>
+          <p data-i18n="step1Desc">Ka dooro khadraad, midho, badar ama saliid suuqa beeraleyda.</p>
+        </div>
+        <div class="step-item">
+          <span class="step-num">02</span>
+          <h3 data-i18n="step2Title">La hadal ama dalbo</h3>
+          <p data-i18n="step2Desc">Si toos ah ula fariimo beeraleyda ama xaqiiji dalabkaaga.</p>
+        </div>
+        <div class="step-item">
+          <span class="step-num">03</span>
+          <h3 data-i18n="step3Title">Hel oo bixi</h3>
+          <p data-i18n="step3Desc">Gaadiidka ayaa kuu keenaya; bixi EVC Plus ama lacag caddaan ah.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="region-map-section">
+    <div class="container">
+      <div class="region-bar-head">
+        <h2 data-i18n="regionBarTitle">Gobollada wax soo saarka</h2>
+        <button type="button" class="text-link" onclick="selectQuickRegion('all')" data-i18n="showAllRegions">Muuji dhammaan</button>
+      </div>
+      <div class="region-cards-row" id="regionCardsRow">
+        <button type="button" class="region-chip active" data-region="all" onclick="selectQuickRegion('all')">
+          <span data-i18n="allRegions">Dhammaan</span>
+        </button>
+        <button type="button" class="region-chip" data-region="Afgooye" onclick="selectQuickRegion('Afgooye')">Afgooye</button>
+        <button type="button" class="region-chip" data-region="Jowhar" onclick="selectQuickRegion('Jowhar')">Jowhar</button>
+        <button type="button" class="region-chip" data-region="Balcad" onclick="selectQuickRegion('Balcad')">Balcad</button>
+        <button type="button" class="region-chip" data-region="Beledweyne" onclick="selectQuickRegion('Beledweyne')">Beledweyne</button>
+        <button type="button" class="region-chip" data-region="Qoryooley" onclick="selectQuickRegion('Qoryooley')">Qoryooley</button>
+        <button type="button" class="region-chip" data-region="Kismayo" onclick="selectQuickRegion('Kismayo')">Kismayo</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-filter" id="filters">
+    <div class="container filter-wrapper">
+      <div class="category-pills">
+        <button type="button" class="pill active" data-category="all"><span data-i18n="catAll">Dhammaan</span></button>
+        <button type="button" class="pill" data-category="khadraad"><span data-i18n="catVeg">Khadraad & Midho</span></button>
+        <button type="button" class="pill" data-category="badar"><span data-i18n="catGrains">Badar & Galley</span></button>
+        <button type="button" class="pill" data-category="saliid"><span data-i18n="catOil">Saliid & Caano</span></button>
+      </div>
+      <select id="regionSelect" class="region-select" aria-label="Filter by region">
+        <option value="all" data-i18n="optAllRegions">Dhammaan gobollada</option>
+        <option value="Afgooye">Afgooye</option>
+        <option value="Jowhar">Jowhar</option>
+        <option value="Balcad">Balcad</option>
+        <option value="Beledweyne">Beledweyne</option>
+        <option value="Qoryooley">Qoryooley</option>
+        <option value="Kismayo">Kismayo</option>
+      </select>
+    </div>
+  </section>
+
+  <main class="container marketplace-section" id="marketplace">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <h2 data-i18n="marketplaceTitle">Wax soo saarka beeraleyda</h2>
+        <p data-i18n="marketplaceSub">Raadso magaca ama dooro gobolka</p>
+      </div>
+      <input type="search" id="searchInput" class="form-control search-inline" placeholder="Raadso muus, yaanyo..." autocomplete="off" />
+    </div>
+    <p class="results-meta" id="resultsMeta"></p>
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+
+  <section class="reviews-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2 data-i18n="reviewsTitle">Qiimaynta macaamiisha</h2>
+          <p data-i18n="reviewsSub">Waxa ganacsatada iyo qoysasku ka yidhaahdeen</p>
+        </div>
+        <button type="button" class="btn-primary btn-sm" onclick="openReviewModal()">
+          <span data-i18n="addReviewBtn">Ku dar faallo</span>
+        </button>
+      </div>
+      <div class="reviews-grid" id="reviewsGrid"></div>
+    </div>
+  </section>
+
+  <nav class="mobile-nav-bar" aria-label="Mobile">
+    <a href="#" class="mobile-nav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
+      <span data-i18n="navHome">Guriga</span>
+    </a>
+    <a href="#marketplace" class="mobile-nav-item"><span data-i18n="navMarket">Suuqa</span></a>
+    <button type="button" class="mobile-nav-item" onclick="openFarmerRegisterModal()">
+      <span data-i18n="navRegister">Diiwaan</span>
+    </button>
+    <button type="button" class="mobile-nav-item" onclick="openCartDrawer()">
+      <span data-i18n="navCart">Alaabta</span>
+      <span class="badge" id="mobileCartBadge">0</span>
+    </button>
+  </nav>
+
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeModals()"></div>
+
+  <aside class="side-drawer" id="chatDrawer" aria-label="Chat">
+    <div class="drawer-header">
+      <div class="chat-farmer-profile">
+        <div class="farmer-avatar" id="chatFarmerAvatar">J</div>
+        <div>
+          <h4 id="chatFarmerName">Jaamac Cali</h4>
+          <p class="muted-sm"><span class="farmer-status-dot"></span> Joogo · <span id="chatFarmerRegion">Afgooye</span></p>
+        </div>
+      </div>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies">
+      <button type="button" class="quick-btn" id="qr1" onclick="sendQuickReply('Qiimaha jumlada waa immisa?')">Jumlad?</button>
+      <button type="button" class="quick-btn" id="qr2" onclick="sendQuickReply('Ma leedahay gaadiid keenaya?')">Gaadiid?</button>
+      <button type="button" class="quick-btn" id="qr3" onclick="sendQuickReply('Maanta ma keeni kartaa?')">Maanta?</button>
+      <button type="button" class="quick-btn" onclick="sendQuickReply('Maxaa bixin ayaad aqbashaa?')">Bixin?</button>
+      <button type="button" class="quick-btn" onclick="sendQuickReply('Dalabka ugu yar waa immisa?')">Ugu yar?</button>
+      <button type="button" class="quick-btn" onclick="sendQuickReply('Telefoonkaaga waa immisa?')">Wac?</button>
+    </div>
+    <div class="chat-input-area">
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Qor fariintaada..." onkeydown="if(event.key==='Enter') sendUserChatMessage()" />
+        <button type="button" class="btn-primary btn-sm" id="chatSendBtn" onclick="sendUserChatMessage()">Dir</button>
+      </div>
+    </div>
+  </aside>
+
+  <aside class="side-drawer" id="cartDrawer" aria-label="Cart">
+    <div class="drawer-header">
+      <h3 id="cartHeaderTitle">Alaabtaada</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-footer">
+      <div class="cart-subtotal-row">
+        <span id="cartSubtotalLabel">Wadarta guud</span>
+        <span id="cartSubtotalUSD">$0.00</span>
+      </div>
+      <button type="button" class="btn-primary" id="cartCheckoutBtn" onclick="proceedCartCheckout()" style="width:100%; justify-content:center;">
+        Xaqiiji iibsiga
+      </button>
+    </div>
+  </aside>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModals()"></div>
+
+  <div class="modal-box" id="orderModal">
+    <div class="modal-header">
+      <h3 id="orderModalHeader">Samee dalab</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <form class="modal-body" onsubmit="submitOrderRequest(event); return false;">
+      <div class="order-summary-box">
+        <h4 id="modalProductTitle">Alaabta</h4>
+        <p id="modalFarmerName" class="muted-sm"></p>
+        <div id="modalPricePerUnit" class="price-highlight"></div>
+      </div>
+      <div class="form-group grid-2">
+        <div>
+          <label for="orderQtyInput" id="lblQty">Tirada</label>
+          <input type="number" id="orderQtyInput" class="form-control" value="1" min="1" oninput="updateOrderTotal()" required />
+        </div>
+        <div>
+          <label for="orderCitySelect" id="lblCity">Magaalada</label>
+          <select id="orderCitySelect" class="form-control" onchange="updateOrderTotal()">
+            <option value="muqdisho">Muqdisho ($2.50)</option>
+            <option value="afgooye">Afgooye ($1.00)</option>
+            <option value="jowhar">Jowhar ($4.00)</option>
+            <option value="balcad">Balcad ($3.00)</option>
+            <option value="beledweyne">Beledweyne ($8.00)</option>
+            <option value="kismayo">Kismayo ($10.00)</option>
+            <option value="hargeisa">Hargeisa ($18.00)</option>
+            <option value="garowe">Garowe ($15.00)</option>
+          </select>
+        </div>
+      </div>
+      <div class="transport-row">
+        <span id="lblTransport">Gaadiidka</span>
+        <span id="modalTransportFee">$2.50</span>
+      </div>
+      <div class="form-group">
+        <label for="orderAddressInput" id="lblAddress">Cinwaanka</label>
+        <input type="text" id="orderAddressInput" class="form-control" placeholder="Tusaale: Hodan, Suuqa Bakaara" required />
+      </div>
+      <div class="form-group grid-2">
+        <div>
+          <label for="orderPhoneInput" id="lblPhone">Telefoonka</label>
+          <input type="tel" id="orderPhoneInput" class="form-control" placeholder="+252 61 XXX XXXX" required />
+        </div>
+        <div>
+          <label for="orderPaymentMethodSelect" id="lblPayment">Habka bixinta</label>
+          <select id="orderPaymentMethodSelect" class="form-control">
+            <option value="EVC Plus">EVC Plus / E-Dahab</option>
+            <option value="Premier Wallet">Premier Wallet / IBS</option>
+            <option value="Cash on Delivery">Lacag marka la keeno</option>
+          </select>
+        </div>
+      </div>
+      <div class="total-row">
+        <span id="lblTotal">Wadarta guud</span>
+        <span id="modalTotalPrice">$0.00</span>
+      </div>
+      <button type="submit" class="btn-primary" id="btnOrderSubmit" style="width:100%; justify-content:center;">Xaqiiji dalabka</button>
+    </form>
+  </div>
+
+  <div class="modal-box" id="evcModal">
+    <div class="modal-header modal-header-evc">
+      <h3>EVC Plus</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <form class="modal-body evc-body" onsubmit="processEvcPinSubmit(event); return false;">
+      <h4 id="lblEvcTitle">Geli PIN-kaaga EVC Plus</h4>
+      <p class="muted-sm">
+        Kharashka: <strong id="evcAmountDisplay">$0.00</strong><br />
+        Telefoonka: <span id="evcPhoneDisplay">+252 61...</span>
+      </p>
+      <div class="form-group" style="max-width:220px; margin:1.2rem auto;">
+        <input type="password" id="evcPinInput" class="form-control pin-input" placeholder="····" maxlength="4" inputmode="numeric" required />
+      </div>
+      <button type="submit" class="btn-primary" id="btnEvcConfirm" style="width:100%; justify-content:center;">Xaqiiji bixinta</button>
+    </form>
+  </div>
+
+  <div class="modal-box" id="invoiceModal" style="max-width:560px;">
+    <div class="modal-header">
+      <h3>Rasiidka dalabka</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="printableArea">
+      <div class="invoice-top">
+        <div>
+          <h2 class="invoice-brand">Beeraley Direct</h2>
+          <p class="muted-sm">Suuqa wax soo saarka beeraleyda</p>
+        </div>
+        <div class="text-right">
+          <h4 id="invOrderNum">#00000</h4>
+          <span id="invDate" class="muted-sm"></span>
+        </div>
+      </div>
+      <div class="grid-2 invoice-parties">
+        <div>
+          <span class="muted-sm">Beeraleyda</span>
+          <h4 id="invFarmer">—</h4>
+        </div>
+        <div>
+          <span class="muted-sm">Macaamiilka</span>
+          <h4 id="invBuyerPhone">—</h4>
+        </div>
+      </div>
+      <table class="invoice-table">
+        <thead>
+          <tr><th>Alaabta</th><th class="text-right">Qiimaha</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="invProduceTitle">—</td>
+            <td class="text-right" id="invProduceCost">$0.00</td>
+          </tr>
+          <tr>
+            <td>Gaadiidka</td>
+            <td class="text-right" id="invTransportFee">$0.00</td>
+          </tr>
+          <tr class="invoice-total">
+            <td>Wadarta guud</td>
+            <td class="text-right" id="invTotalPaid">$0.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="invoice-actions">
+        <button type="button" class="btn-primary" onclick="printReceipt()" style="flex:1; justify-content:center;">Daabac</button>
+        <button type="button" class="btn-secondary" id="invoiceChatBtn" onclick="closeModals(); openChatDrawer(lastConfirmedOrder ? lastConfirmedOrder.product.id : 101);" style="flex:1; justify-content:center;">Wada hadal</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-box" id="farmerProfileModal">
+    <div class="modal-header">
+      <h3>Xogta beeraleyda</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body profile-body">
+      <div class="farmer-avatar lg" id="farmerProfileAvatar">J</div>
+      <h3 id="farmerProfileName">Jaamac Cali Cumar</h3>
+      <p id="farmerProfileRegion" class="region-accent"></p>
+      <div class="grid-2 profile-stats">
+        <div>
+          <span class="muted-sm">Khibradda</span>
+          <h4 id="farmerProfileExperience">12 Sano</h4>
+        </div>
+        <div>
+          <span class="muted-sm">Wax soo saarka</span>
+          <h4 id="farmerProfileHarvest">45 Ton</h4>
+        </div>
+      </div>
+      <button type="button" class="btn-primary" id="profileChatBtn" style="width:100%; justify-content:center;" onclick="closeModals(); openChatDrawer(window._profileProductId || 101);">
+        La hadal beeraleyda
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-box" id="reviewModal">
+    <div class="modal-header">
+      <h3>Ku dar faallo</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <form class="modal-body" onsubmit="submitReview(event); return false;">
+      <div class="form-group">
+        <label for="reviewNameInput">Magacaaga</label>
+        <input type="text" id="reviewNameInput" class="form-control" placeholder="Tusaale: Cali Faarax" required />
+      </div>
+      <div class="form-group grid-2">
+        <div>
+          <label for="reviewRoleInput">Goobta / Doorka</label>
+          <input type="text" id="reviewRoleInput" class="form-control" placeholder="Ganacsade - Muqdisho" />
+        </div>
+        <div>
+          <label for="reviewRatingSelect">Qiimaynta</label>
+          <select id="reviewRatingSelect" class="form-control">
+            <option value="5">5 xiddigood</option>
+            <option value="4">4 xiddigood</option>
+            <option value="3">3 xiddigood</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="reviewTextInput">Faallo</label>
+        <textarea id="reviewTextInput" class="form-control" rows="3" placeholder="Qor waxa aad ka heshay..." required></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Daabac faallada</button>
+    </form>
+  </div>
+
+  <!-- Farmer registration -->
+  <div class="modal-box modal-register" id="farmerRegisterModal">
+    <div class="modal-header">
+      <h3 id="regModalTitle" data-i18n="regTitle">Is-diiwaangeli beeraley ahaan</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <form class="modal-body" id="farmerRegisterForm" onsubmit="submitFarmerRegister(event); return false;" novalidate>
+      <p class="muted-sm" id="regModalHint" data-i18n="regHint" style="margin-bottom:1rem;">Buuxi 4 xogood oo fudud — dabadeed waxaad ku iibin kartaa alaabtaada.</p>
+      <div id="regError" class="form-error" hidden></div>
+
+      <div class="form-group">
+        <label for="regFullName" data-i18n="regName">Magaca buuxa</label>
+        <input type="text" id="regFullName" class="form-control" placeholder="Tusaale: Jaamac Cali Cumar" required autocomplete="name" />
+      </div>
+
+      <div class="form-group">
+        <label for="regPhone" data-i18n="regPhone">Telefoonka (EVC)</label>
+        <input type="tel" id="regPhone" class="form-control" placeholder="061 XXX XXXX ama +252 61..." required autocomplete="tel" />
+      </div>
+
+      <div class="form-group">
+        <label for="regRegion" data-i18n="regRegion">Gobolka / Beerta</label>
+        <select id="regRegion" class="form-control" required>
+          <option value="">— Dooro gobolka —</option>
+          <option value="Afgooye">Afgooye</option>
+          <option value="Jowhar">Jowhar</option>
+          <option value="Balcad">Balcad</option>
+          <option value="Beledweyne">Beledweyne</option>
+          <option value="Qoryooley">Qoryooley</option>
+          <option value="Kismayo">Kismayo</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="regFarmName" data-i18n="regFarm">Magaca beerta</label>
+        <input type="text" id="regFarmName" class="form-control" placeholder="Tusaale: Beerta Afgooye" required />
+      </div>
+
+      <button type="submit" class="btn-primary" id="btnRegSubmit" data-i18n="regSubmit" style="width:100%; justify-content:center; margin-top:0.5rem;">
+        Diiwaangeli akoonka
+      </button>
+    </form>
+  </div>
+
+  <!-- Registration success -->
+  <div class="modal-box" id="farmerSuccessModal">
+    <div class="modal-body profile-body" style="padding:2rem 1.25rem;">
+      <div class="success-check" aria-hidden="true">✓</div>
+      <h3 id="successTitle">Akoonka waa la sameeyay!</h3>
+      <p class="muted-sm" id="successMsg" style="margin:0.6rem 0 1.25rem;"></p>
+      <button type="button" class="btn-primary" id="successPostBtn" onclick="closeModals(); openFarmerPostModal();" style="width:100%; justify-content:center;">
+        Ku iibi alaabtaada hadda
+      </button>
+      <button type="button" class="btn-secondary" onclick="closeModals()" style="width:100%; justify-content:center; margin-top:0.55rem;">
+        Xir
+      </button>
+    </div>
+  </div>
+
+  <!-- Post produce (only after registered / logged farmer) -->
+  <div class="modal-box" id="farmerPostModal">
+    <div class="modal-header">
+      <h3 id="postModalTitle" data-i18n="postTitle">Ku iibi wax soo saarkaaga</h3>
+      <button type="button" class="icon-btn" onclick="closeModals()" aria-label="Close">✕</button>
+    </div>
+    <form class="modal-body" onsubmit="submitNewProduct(event); return false;">
+      <div id="postFarmerBanner" class="order-summary-box" style="display:none;">
+        <p class="muted-sm" data-i18n="postAs">Waxaad ku iibinaysaa sidii:</p>
+        <h4 id="postAsFarmerName">—</h4>
+      </div>
+      <div class="form-group">
+        <label for="postTitleInput" data-i18n="postProduceName">Magaca alaabta</label>
+        <input type="text" id="postTitleInput" class="form-control" placeholder="Tusaale: Cambe macaan oo Afgooye" required />
+      </div>
+      <div class="form-group grid-2">
+        <div>
+          <label for="postCategorySelect" data-i18n="postCategory">Qaybta</label>
+          <select id="postCategorySelect" class="form-control">
+            <option value="khadraad">Khadraad & Midho</option>
+            <option value="badar">Badar & Galley</option>
+            <option value="saliid">Saliid & Caano</option>
+          </select>
+        </div>
+        <div>
+          <label for="postPriceInput" data-i18n="postPrice">Qiimaha USD</label>
+          <input type="number" step="0.1" id="postPriceInput" class="form-control" placeholder="1.50" required />
+        </div>
+      </div>
+      <div class="form-group grid-2">
+        <div>
+          <label for="postUnitInput" data-i18n="postUnit">Halbeegga</label>
+          <input type="text" id="postUnitInput" class="form-control" value="Kg" required />
+        </div>
+        <div>
+          <label for="postRegionInput" data-i18n="postRegion">Gobolka</label>
+          <input type="text" id="postRegionInput" class="form-control" placeholder="Afgooye, Jowhar..." required />
+        </div>
+      </div>
+      <div class="form-group" id="postFarmerNameGroup">
+        <label for="postFarmerNameInput" data-i18n="postFarmerName">Magaca beeraleyda</label>
+        <input type="text" id="postFarmerNameInput" class="form-control" placeholder="Magacaaga" required />
+      </div>
+      <button type="submit" class="btn-primary" data-i18n="postSubmit" style="width:100%; justify-content:center;">Daabac alaabta</button>
+    </form>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>Beeraley Direct</h3>
+        <p data-i18n="footerBrandText">Suuq dijitaal ah oo beeraleyda Soomaaliyeed si toos ah ugu xira macaamiisha.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footerKeyRegions">Gobollada</h4>
+        <ul>
+          <li><button type="button" onclick="selectQuickRegion('Afgooye')">Afgooye</button></li>
+          <li><button type="button" onclick="selectQuickRegion('Jowhar')">Jowhar</button></li>
+          <li><button type="button" onclick="selectQuickRegion('Beledweyne')">Beledweyne</button></li>
+          <li><button type="button" onclick="selectQuickRegion('Kismayo')">Kismayo</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footerProduce">Wax soo saarka</h4>
+        <ul>
+          <li><a href="#marketplace">Midho &amp; Khadraad</a></li>
+          <li><a href="#marketplace">Badar &amp; Galley</a></li>
+          <li><a href="#marketplace">Saliid Sisin</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footerSupport">Caawinaad</h4>
+        <ul>
+          <li><button type="button" onclick="openChatDrawer(101)">Wada hadal toos ah</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 Beeraley Direct. Xuquuqdu way dhawran yihiin.</p>
+    </div>
+  </footer>
+
+  <script src="app.js?v=liin2"></script>
+</body>
+</html>
